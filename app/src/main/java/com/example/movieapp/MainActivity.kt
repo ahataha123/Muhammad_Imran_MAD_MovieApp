@@ -39,9 +39,7 @@ class MainActivity : ComponentActivity() {
                     Column {
                         MyScreen()
                         MovieList()
-
                     }
-
                 }
 
             }
@@ -57,7 +55,6 @@ fun MovieList(movies: List<Movie> = getMovies()){
         items(movies) { movie ->
             MovieRow(movie)
         }
-
     }
 }
 
@@ -74,20 +71,18 @@ fun MovieRow(movie: Movie = getMovies()[0]) {
         Column(
             modifier = Modifier.fillMaxWidth(),
         ) {
-
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(200.dp)
             ) {
                 Image(
-                    painter = rememberAsyncImagePainter(movie.images[2]),
+                    painter = rememberAsyncImagePainter(movie.images[1]),
                     modifier = Modifier
                         .fillMaxWidth(),
                     contentDescription = null,
                     contentScale = ContentScale.Crop
                 )
-
                 Box(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -106,23 +101,30 @@ fun MovieRow(movie: Movie = getMovies()[0]) {
                     .fillMaxWidth()
                     .padding(10.dp),
                 horizontalArrangement = Arrangement.SpaceBetween
+
             ) {
                 Text(movie.title, style = MaterialTheme.typography.h6)
                 var isExpanded by remember { mutableStateOf(false) }
-
-                Box(modifier = Modifier.clickable { isExpanded = !isExpanded }
+                Row(
+                    horizontalArrangement = Arrangement.End
                 ) {
-                    Icon(
-                        imageVector = if (isExpanded) Icons.Default.KeyboardArrowDown else Icons.Default.KeyboardArrowDown,
-                        contentDescription = "Show details"
-                    )
+                    Row(modifier = Modifier.clickable { isExpanded = !isExpanded }
+                    ) {
+                        Icon(
+                            imageVector = if (isExpanded) Icons.Default.KeyboardArrowDown
+                            else Icons.Default.KeyboardArrowUp,
+                            contentDescription = "Show details",
+                        )
+
+                    }
                 }
                 AnimatedVisibility(visible = isExpanded) {
-                    Row(modifier = Modifier) {
-                        Column(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                        ) {
+                    Row(modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(40.dp),
+                        horizontalArrangement = Arrangement.End)
+                    {
+                        Column {
                             Row {
                                 Text(
                                     text = "Genre : ",
@@ -165,8 +167,7 @@ fun MovieRow(movie: Movie = getMovies()[0]) {
                                 Text(text = movie.rating, style = MaterialTheme.typography.subtitle2)
                             }
                             Divider(
-                                 thickness = 1.dp, modifier = Modifier
-                                    .padding(10.dp)
+                                 thickness = 1.dp
                             )
                             Row {
                                 Text(
