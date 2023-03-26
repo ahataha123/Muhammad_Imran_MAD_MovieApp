@@ -23,7 +23,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.rememberAsyncImagePainter
-import com.example.lectureexamples.R
 import com.example.movieapp.ui.theme.MovieAppTheme
 
 
@@ -122,7 +121,7 @@ fun MovieRow(movie: Movie = getMovies()[0]) {
                 AnimatedVisibility(visible = isExpanded) {
                     Row(modifier = Modifier
                         .fillMaxWidth()
-                        .padding(40.dp),
+                        .padding(horizontal = 1.dp, vertical = 50.dp),
                         horizontalArrangement = Arrangement.End)
                     {
                         Column {
@@ -203,7 +202,7 @@ fun MyScreen() {
                     expanded = menuExpanded,
                     onDismissRequest = { menuExpanded = false },
                 ) {
-                    DropdownMenuItem(onClick = { /* Handle Favorites click */ }) {
+                    DropdownMenuItem(onClick = { }) {
                         Icon(Icons.Filled.Favorite,contentDescription = null)
                         Spacer(modifier = Modifier.width(15.dp))
                         Text(text = "Favourites")
