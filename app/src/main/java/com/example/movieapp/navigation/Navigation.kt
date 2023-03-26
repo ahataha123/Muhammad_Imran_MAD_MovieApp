@@ -9,7 +9,6 @@ import androidx.navigation.navArgument
 import com.example.movieapp.screen.DetailScreen
 import com.example.movieapp.screen.FavoriteScreen
 import com.example.movieapp.screen.HomeScreen
-import com.example.movieapp.screen.Screen
 
 
 @Composable
@@ -20,9 +19,8 @@ fun Navigation(){
         composable(route = Screen.HomeScreen.route) {
             HomeScreen(navController)
         }
-
         composable(
-            route = Screen.DetailScreen.route,
+            route = Screen.DetailScreen.route + "/{movieId}",
             arguments = listOf(navArgument("movieId") {
                 type = NavType.StringType
             })

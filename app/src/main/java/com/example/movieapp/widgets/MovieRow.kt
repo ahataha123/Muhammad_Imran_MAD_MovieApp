@@ -20,14 +20,28 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import coil.compose.rememberAsyncImagePainter
-import com.example.movieapp.Movie
+import com.example.movieapp.modules.Movie
+import com.example.movieapp.modules.getMovies
+import com.example.movieapp.navigation.Screen
 
 
-
+@Composable
+fun MovieList(navController: NavController = rememberNavController(),
+              movies: List<Movie> = getMovies()
+) {
+    LazyColumn {
+        items(movies) { movie ->
+            MovieRow(movie = movie) { movieId ->
+                navController.navigate(Screen.DetailScreen.route + "/$movieId")
+            }
+        }
+    }
+}
 @Composable
 fun MovieRow(movie: Movie,onItemClick: (String) -> Unit = {}) {
     Card(
@@ -38,7 +52,6 @@ fun MovieRow(movie: Movie,onItemClick: (String) -> Unit = {}) {
         shape = RoundedCornerShape(corner = CornerSize(15.dp)),
         elevation = 5.dp
     ) {
-
         Column(
             modifier = Modifier.fillMaxWidth(),
         ) {
@@ -72,7 +85,6 @@ fun MovieRow(movie: Movie,onItemClick: (String) -> Unit = {}) {
                     .fillMaxWidth()
                     .padding(10.dp),
                 horizontalArrangement = Arrangement.SpaceBetween
-
             ) {
                 Text(movie.title, style = MaterialTheme.typography.h6)
                 var isExpanded by remember { mutableStateOf(false) }
@@ -130,7 +142,6 @@ fun MovieRow(movie: Movie,onItemClick: (String) -> Unit = {}) {
                                 )
                                 Text(text = movie.actors, style = MaterialTheme.typography.subtitle2)
                             }
-
                             Row {
                                 Text(
                                     text = "Rating : ",
@@ -140,7 +151,7 @@ fun MovieRow(movie: Movie,onItemClick: (String) -> Unit = {}) {
                                 Text(text = movie.rating, style = MaterialTheme.typography.subtitle2)
                             }
                             Divider(
-                                thickness = 1.dp
+                                thickness = 3.dp
                             )
                             Row {
                                 Text(

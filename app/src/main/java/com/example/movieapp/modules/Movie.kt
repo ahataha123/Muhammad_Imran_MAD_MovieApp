@@ -1,4 +1,4 @@
-package com.example.movieapp
+package com.example.movieapp.modules
 
 
 data class Movie(
@@ -11,6 +11,10 @@ data class Movie(
     val plot: String,
     val images: List<String>,
     val rating: String)
+
+fun getSpecificMovie(movieId: String?): Movie? {
+    return getMovies().find { it.id == movieId }
+}
 
 fun getMovies(): List<Movie> {
     return listOf(
@@ -143,7 +147,4 @@ fun getMovies(): List<Movie> {
 
 
     }
-fun getSpecificMovie(movieId: String?): Movie? {
-    return getMovies().find { it.id == movieId }
-}
 

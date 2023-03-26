@@ -1,5 +1,5 @@
-package com.example.movieapp
-import com.example.movieapp.navigation.Navigation
+package com.example.movieapp.navigation
+
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
