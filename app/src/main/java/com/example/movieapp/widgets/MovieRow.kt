@@ -23,32 +23,18 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
 import coil.compose.rememberAsyncImagePainter
 import com.example.movieapp.Movie
-import com.example.movieapp.getMovies
 
 
-@Preview
+
 @Composable
-fun MovieList(navController: NavController = rememberNavController(),
-              movies: List<Movie> = getMovies()){
-    LazyColumn{
-        items(movies) { movie ->
-            MovieRow( movie = movie,
-            )  { movieId ->
-                navController.navigate("DetailScreen/$movieId")
-            }
-        }
-    }
-}
-@Composable
-fun MovieRow(movie: Movie, onItemClick: (String) -> Unit = {}) {
+fun MovieRow(movie: Movie,onItemClick: (String) -> Unit = {}) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(5.dp),
+            .padding(5.dp)
+            .clickable { onItemClick(movie.id) },
         shape = RoundedCornerShape(corner = CornerSize(15.dp)),
         elevation = 5.dp
     ) {

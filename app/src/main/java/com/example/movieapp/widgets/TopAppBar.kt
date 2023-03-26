@@ -13,6 +13,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.movieapp.R
+import com.example.movieapp.screen.Screen
 
 @Composable
 fun TopAppBar(navController: NavController) {
@@ -30,7 +31,7 @@ fun TopAppBar(navController: NavController) {
                     expanded = menuExpanded,
                     onDismissRequest = { menuExpanded = false },
                 ) {
-                    DropdownMenuItem(onClick = { /* Handle Favorites click */ }) {
+                    DropdownMenuItem(onClick = { menuExpanded = true; navController.navigate(Screen.FavoritesScreen.route)}) {
                         Icon(Icons.Filled.Favorite,contentDescription = null)
                         Spacer(modifier = Modifier.width(15.dp))
                         Text(text = "Favourites")
