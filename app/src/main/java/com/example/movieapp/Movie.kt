@@ -140,4 +140,10 @@ fun getMovies(): List<Movie> {
             rating = "9.5"),
 
         )
+
+
+    }
+fun getSpecificMovie(movieId: String?): Movie? {
+    return getMovies().find { it.id == movieId }
 }
+
