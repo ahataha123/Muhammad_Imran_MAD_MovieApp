@@ -3,15 +3,19 @@ package com.example.movieapp.navigation
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.viewModels
+import com.example.movieapp.modules.ViewModel
 import com.example.movieapp.ui.theme.MovieAppTheme
 
-// Done with Adam Ibragimov,Kenan Husic
+
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val viewModel: ViewModel by viewModels()
+        viewModel.movies
         setContent {
             MovieAppTheme {
-                Navigation()
+                Navigation(viewModel = viewModel)
                 }
 
             }

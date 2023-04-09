@@ -6,29 +6,37 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.example.movieapp.modules.ViewModel
+import com.example.movieapp.screen.AddMovieScreen
 import com.example.movieapp.screen.DetailScreen
 import com.example.movieapp.screen.FavoriteScreen
 import com.example.movieapp.screen.HomeScreen
 
 
 @Composable
-fun Navigation(){
+fun Navigation(viewModel: ViewModel) {
     val navController = rememberNavController()
+    NavHost(navController = navController, startDestination = Screen.MainScreen.route) {
+        composable(route = Screen.MainScreen.route){
+            HomeScreen(navController = navController, viewModel = viewModel)
+        }
 
-    NavHost(navController = navController, startDestination = Screen.HomeScreen.route) {
-        composable(route = Screen.HomeScreen.route) {
-            HomeScreen(navController)
+        composable(Screen.FavoriteScreen.route) {
+            FavoriteScreen(navController = navController, viewModel = viewModel)
         }
+
+        composable(Screen.AddMovieScreen.route) {
+            AddMovieScreen(navController = navController, viewModel = viewModel)
+        }
+
+        // build a route like: root/detail-screen/id=34
         composable(
-            route = Screen.DetailScreen.route + "/{movieId}",
-            arguments = listOf(navArgument("movieId") {
-                type = NavType.StringType
-            })
-        ) { backStackEntry ->
-            DetailScreen(navController, movieId = backStackEntry.arguments?.getString("movieId"))
-        }
-        composable(route = Screen.FavoritesScreen.route) {
-            FavoriteScreen(navController)
+            Screen.DetailScreen.route,
+            arguments = listOf(navArgument(name = DETAIL_ARGUMENT_KEY) {type = NavType.StringType})
+        ) { backStackEntry ->    // backstack contains all information from navhost
+            DetailScreen(navController = navController, viewModel = viewModel, movieId = backStackEntry.arguments?.getString(
+                DETAIL_ARGUMENT_KEY)
+            )
         }
     }
 }
