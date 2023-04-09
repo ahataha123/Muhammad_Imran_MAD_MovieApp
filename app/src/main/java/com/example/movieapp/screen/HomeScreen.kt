@@ -14,6 +14,7 @@ import androidx.compose.ui.unit.dp
 import com.example.movieapp.modules.ViewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.example.movieapp.navigation.Screen
 import com.example.movieapp.widgets.HomeTopAppBar
 import com.example.movieapp.widgets.MovieRow
 
@@ -24,7 +25,7 @@ fun HomeScreen(navController: NavController = rememberNavController(), viewModel
         HomeTopAppBar(
             title = "Home",
             menuContent = {
-                DropdownMenuItem(onClick = { navController.navigate(com.example.movieapp.navigation.Screen.AddMovieScreen.route) }) {
+                DropdownMenuItem(onClick = { navController.navigate(Screen.AddMovieScreen.route) }) {
                     Row {
                         Icon(imageVector = Icons.Default.Edit, contentDescription = "Add Movie", modifier = Modifier.padding(4.dp))
                         Text(text = "Add Movie", modifier = Modifier
@@ -32,7 +33,7 @@ fun HomeScreen(navController: NavController = rememberNavController(), viewModel
                             .padding(4.dp))
                     }
                 }
-                DropdownMenuItem(onClick = { navController.navigate(com.example.movieapp.navigation.Screen.FavoriteScreen.route) }) {
+                DropdownMenuItem(onClick = { navController.navigate(Screen.FavoriteScreen.route) }) {
                     Row {
                         Icon(imageVector = Icons.Default.Favorite, contentDescription = "Favorites", modifier = Modifier.padding(4.dp))
                         Text(text = "Favorites", modifier = Modifier
@@ -48,11 +49,7 @@ fun HomeScreen(navController: NavController = rememberNavController(), viewModel
 }
 
 @Composable
-fun MainContent(
-    modifier: Modifier,
-    navController: NavController,
-    viewModel: ViewModel
-) {
+fun MainContent(modifier: Modifier, navController: NavController, viewModel: ViewModel) {
     MovieList(
         modifier = modifier,
         navController = navController,
@@ -61,11 +58,7 @@ fun MainContent(
 }
 
 @Composable
-fun MovieList(
-    modifier: Modifier = Modifier,
-    navController: NavController,
-    viewModel: ViewModel,
-) {
+fun MovieList(modifier: Modifier = Modifier, navController: NavController, viewModel: ViewModel ) {
     LazyColumn (
         modifier = modifier,
         contentPadding = PaddingValues(all = 12.dp),
@@ -75,7 +68,7 @@ fun MovieList(
             MovieRow(
                 movie = movie,
                 onItemClick = { movieId ->
-                    navController.navigate(com.example.movieapp.navigation.Screen.DetailScreen.withId(movieId))
+                    navController.navigate(Screen.DetailScreen.withId(movieId))
                 }
             ) { movieId ->
                 viewModel.toggleFavorite(movieId)

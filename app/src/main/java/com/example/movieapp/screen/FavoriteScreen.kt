@@ -18,7 +18,7 @@ import com.example.movieapp.widgets.MovieRow
 fun FavoriteScreen(navController: NavController, viewModel: ViewModel) {
     Scaffold(topBar = {
         SimpleTopAppBar(arrowBackClicked = { navController.popBackStack() }) {
-            Text(text = "My Favorite Movies")
+            Text(text = "Favorites")
         }
     }){ padding ->
 
@@ -29,10 +29,10 @@ fun FavoriteScreen(navController: NavController, viewModel: ViewModel) {
                         movie = movie,
                         onItemClick = { movieId ->
                             navController.navigate(route = Screen.DetailScreen.withId(movieId))
-                        }
-                    ) {
+                        },
+                        onFavClick = {
                         viewModel.toggleFavorite(movie)
-                    }
+                        })
                 }
             }
         }

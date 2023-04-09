@@ -16,11 +16,7 @@ import com.example.movieapp.widgets.MovieRow
 import com.example.movieapp.widgets.SimpleTopAppBar
 
 @Composable
-fun DetailScreen(
-    navController: NavController,
-    movieId:String?,
-    viewModel: ViewModel
-) {
+fun DetailScreen(navController: NavController, movieId:String?, viewModel: ViewModel) {
 
     movieId?.let {
         val movie = viewModel.allMovies.filter { it.id == movieId }[0]

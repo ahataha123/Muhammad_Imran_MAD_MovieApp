@@ -1,6 +1,7 @@
 package com.example.movieapp.navigation
 
 import androidx.compose.runtime.Composable
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -14,8 +15,9 @@ import com.example.movieapp.screen.HomeScreen
 
 
 @Composable
-fun Navigation(viewModel: ViewModel) {
+fun Navigation() {
     val navController = rememberNavController()
+    val viewModel: ViewModel = viewModel()
     NavHost(navController = navController, startDestination = Screen.MainScreen.route) {
         composable(route = Screen.MainScreen.route){
             HomeScreen(navController = navController, viewModel = viewModel)

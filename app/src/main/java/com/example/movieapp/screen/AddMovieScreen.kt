@@ -136,12 +136,7 @@ fun MainContents(modifier: Modifier = Modifier, navController: NavController, vi
 }
 
 @Composable
-private fun TextInputField(
-    text: MutableState<String>,
-    errorState: MutableState<Boolean>,
-    label: Int,
-    validateMethod: () -> Unit
-) {
+private fun TextInputField(text: MutableState<String>, errorState: MutableState<Boolean>, label: Int, validateMethod: () -> Unit) {
     OutlinedTextField(
         value = text.value,
         singleLine = true,

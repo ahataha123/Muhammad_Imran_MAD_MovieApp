@@ -15,7 +15,7 @@ class MainActivity : ComponentActivity() {
         viewModel.movies
         setContent {
             MovieAppTheme {
-                Navigation(viewModel = viewModel)
+                Navigation()
                 }
 
             }
