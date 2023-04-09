@@ -23,58 +23,10 @@ import com.example.movieapp.modules.ViewModel
 import com.example.movieapp.widgets.SimpleTopAppBar
 
 
-@Composable
-private fun TextInputField(
-    text: MutableState<String>,
-    errorState: MutableState<Boolean>,
-    label: Int,
-    validateMethod: () -> Unit
-) {
-    OutlinedTextField(
-        value = text.value,
-        singleLine = true,
-        modifier = Modifier.fillMaxWidth(),
-        onValueChange = {
-            text.value = it
-            validateMethod()
-        },
-        label = { Text(stringResource(id = label)) },
-        isError = errorState.value
-    )
-    ErrorMessage(value = errorState.value)
-}
-
-@Composable
-private fun ErrorMessage(value: Boolean) {
-    if (value) {
-        Text(
-            text = "Please fill the field",
-            color = Color.Red,
-            style = MaterialTheme.typography.subtitle2
-        )
-    }
-}
-
-@Composable
-fun AddMovieScreen(navController: NavController, viewModel: ViewModel){
-    val scaffoldState = rememberScaffoldState()
-
-    Scaffold(
-        scaffoldState = scaffoldState,
-        topBar = {
-            SimpleTopAppBar(arrowBackClicked = { navController.popBackStack() }) {
-                Text(text = stringResource(id = R.string.add_movie))
-            }
-        },
-    ) { padding ->
-        MainContent(Modifier.padding(padding), navController, viewModel = viewModel)
-    }
-    viewModel.validation()
-}
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun MainContent(modifier: Modifier = Modifier, viewModel: ViewModel) {
+fun MainContents(modifier: Modifier = Modifier, navController: NavController, viewModel: ViewModel) {
     Surface(
         modifier = modifier
             .fillMaxWidth()
@@ -175,6 +127,7 @@ fun MainContent(modifier: Modifier = Modifier, viewModel: ViewModel) {
                         viewModel.plot.value,
                         viewModel.rating.value
                     )
+                    navController.popBackStack()
                 }) {
                 Text(text = stringResource(R.string.add))
             }
@@ -182,3 +135,51 @@ fun MainContent(modifier: Modifier = Modifier, viewModel: ViewModel) {
     }
 }
 
+@Composable
+private fun TextInputField(
+    text: MutableState<String>,
+    errorState: MutableState<Boolean>,
+    label: Int,
+    validateMethod: () -> Unit
+) {
+    OutlinedTextField(
+        value = text.value,
+        singleLine = true,
+        modifier = Modifier.fillMaxWidth(),
+        onValueChange = {
+            text.value = it
+            validateMethod()
+        },
+        label = { Text(stringResource(id = label)) },
+        isError = errorState.value
+    )
+    ErrorMessage(value = errorState.value)
+}
+
+@Composable
+private fun ErrorMessage(value: Boolean) {
+    if (value) {
+        Text(
+            text = "Please fill the field",
+            color = Color.Red,
+            style = MaterialTheme.typography.subtitle2
+        )
+    }
+}
+
+@Composable
+fun AddMovieScreen(navController: NavController, viewModel: ViewModel){
+    val scaffoldState = rememberScaffoldState()
+
+    Scaffold(
+        scaffoldState = scaffoldState,
+        topBar = {
+            SimpleTopAppBar(arrowBackClicked = { navController.popBackStack() }) {
+                Text(text = stringResource(id = R.string.add_movie))
+            }
+        },
+    ) { padding ->
+        MainContents(Modifier.padding(padding), navController, viewModel = viewModel)
+    }
+    viewModel.validation()
+}

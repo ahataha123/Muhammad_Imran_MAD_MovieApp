@@ -75,7 +75,9 @@ class ViewModel : ViewModel() {
             actors = actors,
             plot = plot,
             rating = rating.toFloat(), images = listOf(
-                "https://i.ds.at/rc9FAA/rs:fill:750:0/plain/2014/01/14/1388693526907-wallstreet-800.jpg",)
+                "https://images-na.ssl-images-amazon.com/images/M/MV5BNzM2MDk3MTcyMV5BMl5BanBnXkFtZTcwNjg0MTUzNA@@._V1_SX1777_CR0,0,1777,999_AL_.jpg",
+                "https://images-na.ssl-images-amazon.com/images/M/MV5BMTMwNTg5MzMwMV5BMl5BanBnXkFtZTcwMzA2NTIyMw@@._V1_SX1777_CR0,0,1777,937_AL_.jpg",
+                "https://images-na.ssl-images-amazon.com/images/M/MV5BMTExMDk1MDE4NzVeQTJeQWpwZ15BbWU4MDM4NDM0ODAx._V1_SX1500_CR0,0,1500,999_AL_.jpg",)
         )
         movies.add(newMovie)
 
