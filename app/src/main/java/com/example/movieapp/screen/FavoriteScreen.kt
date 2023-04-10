@@ -31,7 +31,7 @@ fun FavoriteScreen(navController: NavController, viewModel: ViewModel) {
                             navController.navigate(route = Screen.DetailScreen.withId(movieId))
                         },
                         onFavClick = {
-                        viewModel.toggleFavorite(movie)
+                        viewModel.toggleFavorite(it)
                         })
                 }
             }

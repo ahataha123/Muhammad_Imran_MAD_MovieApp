@@ -83,6 +83,7 @@ class ViewModel : ViewModel() {
 
     }
 
+
     fun toggleFavorite(movie: Movie) {
         movies.find { it.id == movie.id }?.let { task ->
             task.isFavorite = !task.isFavorite
@@ -95,27 +96,28 @@ class ViewModel : ViewModel() {
     }
     fun validateTitle() {
         errorTitle.value = title.value.isEmpty()
-        enable()
+        addbuttonenable()
+
     }
 
     fun validateYear() {
         errorYear.value = year.value.isEmpty()
-        enable()
+        addbuttonenable()
     }
 
     fun validateDirector() {
         errorDirector.value = director.value.isEmpty()
-        enable()
+        addbuttonenable()
     }
 
     fun validateActors() {
         errorActors.value = actors.value.isEmpty()
-        enable()
+        addbuttonenable()
     }
 
     fun validatePlot() {
         errorPlot.value = plot.value.isEmpty()
-        enable()
+        addbuttonenable()
     }
 
     fun validateRating() {
@@ -125,7 +127,7 @@ class ViewModel : ViewModel() {
         } catch (e: java.lang.Exception) {
             errorRating.value = true
         } finally {
-            enable()
+            addbuttonenable()
         }
     }
 
@@ -137,10 +139,10 @@ class ViewModel : ViewModel() {
                 return@genres
             }
         }
-        enable()
+        addbuttonenable()
     }
 
-    private fun enable() {
+    private fun addbuttonenable() {
         isDisabled.value =
             (errorTitle.value.not()
                     && errorYear.value.not()
