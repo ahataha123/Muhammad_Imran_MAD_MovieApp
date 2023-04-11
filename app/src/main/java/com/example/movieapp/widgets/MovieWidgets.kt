@@ -27,7 +27,6 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.AsyncImage
 import coil.compose.SubcomposeAsyncImage
 import coil.request.ImageRequest
@@ -87,7 +86,7 @@ fun MovieImage(imageUrl: String) {
 
 @Composable
 fun FavoriteIcon(onFavClick: (Movie) -> Unit, movie: Movie,viewModel: ViewModel) {
-    var isFavorited by remember { mutableStateOf(false) }
+    var isFavorites by remember { mutableStateOf(false) }
 
     Box(
         modifier = Modifier
@@ -96,12 +95,12 @@ fun FavoriteIcon(onFavClick: (Movie) -> Unit, movie: Movie,viewModel: ViewModel)
         contentAlignment = Alignment.TopEnd
     ) {
         Icon(
-            tint = if (isFavorited) Color.Red else MaterialTheme.colors.secondary,
-            imageVector = if (isFavorited) Icons.Default.Favorite else Icons.Default.FavoriteBorder,
+            tint = if (isFavorites) Color.Red else MaterialTheme.colors.secondary,
+            imageVector = if (isFavorites) Icons.Default.Favorite else Icons.Default.FavoriteBorder,
             contentDescription = "Add to favorites",
             modifier = Modifier
                 .clickable {
-                    isFavorited = !isFavorited
+                    isFavorites = !isFavorites
                     viewModel.toggleFavorite(movie)
                     onFavClick(movie)
                 }

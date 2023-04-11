@@ -136,7 +136,7 @@ fun MainContents(modifier: Modifier = Modifier, navController: NavController, vi
 }
 
 @Composable
-private fun TextInputField(text: MutableState<String>, errorState: MutableState<Boolean>, label: Int, validateMethod: () -> Unit) {
+ fun TextInputField(text: MutableState<String>, errorState: MutableState<Boolean>, label: Int, validateMethod: () -> Unit) {
     OutlinedTextField(
         value = text.value,
         singleLine = true,
@@ -152,7 +152,7 @@ private fun TextInputField(text: MutableState<String>, errorState: MutableState<
 }
 
 @Composable
-private fun ErrorMessage(value: Boolean) {
+ fun ErrorMessage(value: Boolean) {
     if (value) {
         Text(
             text = "Please fill the field",
